@@ -63,7 +63,7 @@ exports.employeeLogin = asyncHandler(async (req, res) => {
     }
     // create token and send cookie
     const token = jwt.sign({ _id: result._id }, process.env.JWT_SECRET)
-    res.cookie("todo-admin", token, {
+    res.cookie("todo-employee", token, {
         maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
         secure: process.env.NODE_ENV === "prod" ? true : false
