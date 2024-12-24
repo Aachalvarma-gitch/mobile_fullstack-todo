@@ -17,7 +17,13 @@ app.use("/api/auth", require("./routes/auth.routes"))
 app.use("/api/admin", adminProtected, require("./routes/admin.routes"))
 app.use("/api/employee", adminProtected, require("./routes/employee.routes"))
 app.use("*", (req, res) => {
-    res.status(401).json({ message: "resource not found" })
+    res.status(404).json({ message: "resource not found" })
+})
+app.use((err, req, res, next) => {
+    if (err) {
+        console.log(err);
+        return res.status(500).json({ message: "something went wrong" })
+    }
 })
 
 mongoose.connect(process.env.MONGO_URL)
