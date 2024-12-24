@@ -51,7 +51,7 @@ exports.employeeRegister = asyncHandler(async (req, res) => {
 })
 exports.employeeLogin = asyncHandler(async (req, res) => {
     // verify email
-    const { email } = req.body
+    const { email, password } = req.body
     const result = await Employee.findOne({ email })
     if (!result) {
         res.status(401).json({ message: "email not found" })
